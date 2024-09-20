@@ -5,18 +5,15 @@ from backend.settings import BASE_DIR
 
 # Configure the domain name using the environment variable
 # that Azure automatically creates for us.
-ALLOWED_HOSTS = (
-    [os.environ["WEBSITE_HOSTNAME"]] if "WEBSITE_HOSTNAME" in os.environ else []
-)
+ALLOWED_HOSTS = [os.environ["ALLOWED_HOSTS"]] if "ALLOWED_HOSTS" in os.environ else []
 CSRF_TRUSTED_ORIGINS = (
-    ["https://" + os.environ["WEBSITE_HOSTNAME"]]
-    if "WEBSITE_HOSTNAME" in os.environ
-    else []
+    ["https://" + os.environ["ALLOWED_HOSTS"]] if "ALLOWED_HOSTS" in os.environ else []
 )
 DEBUG = False
 
 # WhiteNoise configuration
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     # Add whitenoise middleware after the security middleware
     "whitenoise.middleware.WhiteNoiseMiddleware",
