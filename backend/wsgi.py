@@ -13,9 +13,7 @@ from django.core.wsgi import get_wsgi_application
 
 # If so, then load the settings from production.py
 settings_module = (
-    "azureproject.production"
-    if "WEBSITE_HOSTNAME" in os.environ
-    else "azureproject.settings"
+    "backend.production" if "WEBSITE_HOSTNAME" in os.environ else "backend.settings"
 )
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", settings_module)
 
